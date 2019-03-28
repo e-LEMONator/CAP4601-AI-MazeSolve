@@ -1,9 +1,9 @@
 package com.mazesolver.java.maze;
 
+import com.mazesolver.java.Constants;
+
 public class MazeCell
 {
-	
-	
 	private final int row;
 	private final int column;
 	private char symbol;
@@ -27,34 +27,34 @@ public class MazeCell
 	{
 		if(this.row == 0)
 		{
-			this.upEdge = OOB;
-			this.downEdge = WALL;
+			this.upEdge = Constants.OOB;
+			this.downEdge = Constants.WALL;
 		}
-		else if(this.row == (mazeSize - 1))
+		else if(this.row == (Constants.getMazeSize() - 1))
 		{
-			this.upEdge = WALL;
-			this.downEdge = OOB;
+			this.upEdge = Constants.WALL;
+			this.downEdge = Constants.OOB;
 		}
 		else
 		{
-			this.upEdge = WALL;
-			this.downEdge = WALL;
+			this.upEdge = Constants.WALL;
+			this.downEdge = Constants.WALL;
 		}
 		
 		if(this.column == 0)
 		{
-			this.leftEdge = OOB;
-			this.rightEdge = WALL;
+			this.leftEdge = Constants.OOB;
+			this.rightEdge = Constants.WALL;
 		}
-		else if(this.column == (mazeSize - 1))
+		else if(this.column == (Constants.getMazeSize() - 1))
 		{
-			this.leftEdge = WALL;
-			this.rightEdge = OOB;
+			this.leftEdge = Constants.WALL;
+			this.rightEdge = Constants.OOB;
 		}
 		else
 		{
-			this.leftEdge = WALL;
-			this.rightEdge = WALL;
+			this.leftEdge = Constants.WALL;
+			this.rightEdge = Constants.WALL;
 		}
 	}
 	
@@ -73,16 +73,16 @@ public class MazeCell
 	{
 		switch(move)
 		{
-			case 0:
+			case Constants.STAY:
 				return true;
-			case 1:
-				return (upEdge == OPEN);
-			case 2:
-				return (rightEdge == OPEN);
-			case 3:
-				return (downEdge == OPEN);
-			case 4:
-				return (leftEdge == OPEN);
+			case Constants.UP:
+				return (upEdge == Constants.OPEN);
+			case Constants.RIGHT:
+				return (rightEdge == Constants.OPEN);
+			case Constants.DOWN:
+				return (downEdge == Constants.OPEN);
+			case Constants.LEFT:
+				return (leftEdge == Constants.OPEN);
 			default:
 				return false;
 		}
