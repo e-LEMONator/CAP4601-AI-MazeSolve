@@ -19,6 +19,7 @@ public class Maze
 	}
 	
 	// TODO: implement generateMaze
+
 	
 	// TODO: implement printMaze
 }
