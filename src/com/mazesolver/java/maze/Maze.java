@@ -9,12 +9,12 @@ public class Maze
 	private MazeCell[][] mazeGrid;
 	private MazeCell start;
 	private MazeCell finish;
-
+	
 	public Maze(int mazeSize)
 	{
 		Constants.setMazeSize(mazeSize);
 		this.mazeGrid = new MazeCell[mazeSize][mazeSize];
-
+		
 		for(int row = 0; row < Constants.getMazeSize(); row++)
 		{
 			for(int column = 0; column < Constants.getMazeSize(); column++)
@@ -22,15 +22,15 @@ public class Maze
 				this.mazeGrid[row][column] = new MazeCell(row, column);
 			}
 		}
-
+		
 		selectRandomStart();
 	}
-
+	
 	private void selectRandomStart()
 	{
 		Random rand = new Random();
 		int bound = rand.nextInt(4) + 1;
-
+		
 		switch(bound)
 		{
 			case Constants.UP: // top bound
@@ -47,7 +47,7 @@ public class Maze
 				break;
 		}
 	}
-
+	
 	// TODO: implement generateMaze
 	private void generateMaze()
 	{
@@ -56,10 +56,10 @@ public class Maze
 		Random rand = new Random();
 		int adjacentMove;
 		MazeCell adjacentCell;
-		int maxDepth;
+		int maxDepth = 0;
 
 		stack.push(this.start);
-
+		
 		do
 		{
 			while(!visited.contains(this.getAdjacent(stack.peek(), Constants.UP)) ||
@@ -67,21 +67,24 @@ public class Maze
 				  !visited.contains(this.getAdjacent(stack.peek(), Constants.DOWN)) ||
 				  !visited.contains(this.getAdjacent(stack.peek(), Constants.LEFT)))
 			{
-
-
-				do
+				
+				if(stack.size() > maxDepth)
 				{
+					maxDepth = stack.size();
+					this.finish = stack.peek();
+				}
+				
+				do
+				{					
 					adjacentMove = rand.nextInt(4) + 1;
-
+					
 					adjacentCell = this.getAdjacent(stack.peek(), adjacentMove);
 				} while(adjacentCell == null || visited.contains(adjacentCell));
-
-
-
+				
 				visited.add(stack.peek());
 				stack.push(adjacentCell);
 			}
-
+			
 			stack.pop();
 
 		} while(!stack.isEmpty());
@@ -90,7 +93,7 @@ public class Maze
 	private MazeCell getAdjacent(MazeCell currentCell, int move)
 	{
 		int row, column;
-
+		
 		if(currentCell.checkMove(move) != Constants.OOB)
 		{
 			row = currentCell.getRow();
@@ -112,9 +115,9 @@ public class Maze
 					break;
 			}
 		}
-
+		
 		return null;
 	}
-
+	
 	// TODO: implement printMaze
 }
