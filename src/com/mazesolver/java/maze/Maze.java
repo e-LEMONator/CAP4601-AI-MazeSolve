@@ -51,66 +51,69 @@ public class Maze
 	// TODO: implement generateMaze
 	private void generateMaze()
 	{
-		MazeCell currentCell;
-		MazeCell adjacentCell;
-		boolean adjacentVisited = false;
-
+		Stack<MazeCell> stack = new Stack();  // For keeping track of where we need to go
+		ArrayList<MazeCell> visited = new ArrayList();  // For making sure not to visit a previous cell
 		Random rand = new Random();
 		int adjacentMove;
+		MazeCell adjacentCell;
+		int maxDepth;
 
-		Stack stack = new Stack();  // For keeping track of where we need to go
-		ArrayList visited = new ArrayList();  // For making sure not to visit a previous cell
-
-		currentCell = this.start;
-
+		stack.push(this.start);
+		
 		do
 		{
-			stack.push(currentCell);
-			// TODO: add currentCell to visited list
-
-
-			adjacentMove = rand.nextInt(4) + 1;
-
-			while (!adjacentVisited)
+			while(!visited.contains(this.getAdjacent(stack.peek(), Constants.UP)) ||
+				  !visited.contains(this.getAdjacent(stack.peek(), Constants.RIGHT)) ||
+				  !visited.contains(this.getAdjacent(stack.peek(), Constants.DOWN)) ||
+				  !visited.contains(this.getAdjacent(stack.peek(), Constants.LEFT)))
 			{
-				adjacentCell = currentCell;
-
-				switch(adjacentMove)
-				{
-					// TODO: Fix this assignment
-					case Constants.UP: // Move up
-						adjacentCell[2] ;
-						break;
-					case Constants.RIGHT: // Move right
-						adjacentCell = currentCell;
-						break;
-					case Constants.DOWN: // Move down
-						adjacentCell = currentCell;
-					case Constants.LEFT: // Move left
-						adjacentCell = currentCell;
-					default:
-						break;
-				}
-
-				// TODO: Implement this check
-//				if (this.adjacentCell //not visited, so not in visited list)
-//				{
-//
-//				}
+				
+				
+				do
+				{					
+					adjacentMove = rand.nextInt(4) + 1;
+					
+					adjacentCell = this.getAdjacent(stack.peek(), adjacentMove);
+				} while(adjacentCell == null || visited.contains(adjacentCell));
+				
+				
+				
+				visited.add(stack.peek());
+				stack.push(adjacentCell);
 			}
+			
+			stack.pop();
 
-			// TODO: Break the wall between currentCell and adjacentCell
-
-			currentCell = adjacentCell;
-
-		}while(!stack.isEmpty());
-
-
+		} while(!stack.isEmpty());
 	}
 
-	private boolean checkAdj(MazeCell currentCell, int move)
+	private MazeCell getAdjacent(MazeCell currentCell, int move)
 	{
+		int row, column;
+		
+		if(currentCell.checkMove(move) != Constants.OOB)
+		{
+			row = currentCell.getRow();
+			column = currentCell.getColumn();
 
+			switch(move)
+			{
+				case Constants.STAY:
+					return this.mazeGrid[row][column];
+				case Constants.UP:
+					return this.mazeGrid[row - 1][column];
+				case Constants.RIGHT:
+					return this.mazeGrid[row][column + 1];
+				case Constants.DOWN:
+					return this.mazeGrid[row + 1][column];
+				case Constants.LEFT:
+					return this.mazeGrid[row][column - 1];
+				default:
+					break;
+			}
+		}
+		
+		return null;
 	}
 	
 	// TODO: implement printMaze

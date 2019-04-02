@@ -69,25 +69,37 @@ public class MazeCell
 	 * 4 - move left
 	 * @return true if move is valid, false otherwise
 	 */
-	public boolean checkMove(int move)
+	public int checkMove(int move)
 	{
 		switch(move)
 		{
 			case Constants.STAY:
-				return true;
+				return Constants.OPEN;
 			case Constants.UP:
-				return (upEdge == Constants.OPEN);
+				return upEdge;
 			case Constants.RIGHT:
-				return (rightEdge == Constants.OPEN);
+				return rightEdge;
 			case Constants.DOWN:
-				return (downEdge == Constants.OPEN);
+				return downEdge;
 			case Constants.LEFT:
-				return (leftEdge == Constants.OPEN);
+				return leftEdge;
 			default:
-				return false;
+				return Constants.OOB;
 		}
 	}
 
+	public int getRow()
+	{
+		return row;
+	}
+
+	public int getColumn()
+	{
+		return column;
+	}
+
+	
+	
 	public char getSymbol()
 	{
 		return symbol;
