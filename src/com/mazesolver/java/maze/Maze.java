@@ -9,8 +9,6 @@ public class Maze
 	private MazeCell[][] mazeGrid;
 	private MazeCell start;
 	private MazeCell finish;
-	private MazeCell currentCell;
-	private MazeCell adjacentCell;
 	
 	public Maze(int mazeSize)
 	{
@@ -53,35 +51,43 @@ public class Maze
 	// TODO: implement generateMaze
 	private void generateMaze()
 	{
+		MazeCell currentCell;
+		MazeCell adjacentCell;
 		boolean adjacentVisited = false;
-		Stack queue = new Stack();  // For keeping track of where we need to go
+
+		Random rand = new Random();
+		int adjacentMove;
+
+		Stack stack = new Stack();  // For keeping track of where we need to go
 		ArrayList visited = new ArrayList();  // For making sure not to visit a previous cell
 
-		this.currentCell = this.start;
+		currentCell = this.start;
 
 		do
 		{
-			queue.push(this.currentCell);
+			stack.push(currentCell);
 			// TODO: add currentCell to visited list
 
-			Random rand = new Random();
-			int adjacentMove = rand.nextInt(4) + 1;
+
+			adjacentMove = rand.nextInt(4) + 1;
 
 			while (!adjacentVisited)
 			{
+				adjacentCell = currentCell;
+
 				switch(adjacentMove)
 				{
 					// TODO: Fix this assignment
 					case Constants.UP: // Move up
-						this.adjacentCell = this.currentCell;
+						adjacentCell[2] ;
 						break;
 					case Constants.RIGHT: // Move right
-						this.adjacentCell = this.currentCell;
+						adjacentCell = currentCell;
 						break;
 					case Constants.DOWN: // Move down
-						this.adjacentCell = this.currentCell;
+						adjacentCell = currentCell;
 					case Constants.LEFT: // Move left
-						this.adjacentCell = this.currentCell;
+						adjacentCell = currentCell;
 					default:
 						break;
 				}
@@ -97,8 +103,13 @@ public class Maze
 
 			currentCell = adjacentCell;
 
-		}while(!queue.isEmpty());
+		}while(!stack.isEmpty());
 
+
+	}
+
+	private boolean checkAdj(MazeCell currentCell, int move)
+	{
 
 	}
 	
