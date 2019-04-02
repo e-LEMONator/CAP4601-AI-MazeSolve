@@ -66,7 +66,7 @@ public class Maze
 		do
 		{
 			stack.push(currentCell);
-			// TODO: add currentCell to visited list
+			visited.add(currentCell);
 
 
 			adjacentMove = rand.nextInt(4) + 1;
@@ -79,7 +79,7 @@ public class Maze
 				{
 					// TODO: Fix this assignment
 					case Constants.UP: // Move up
-						adjacentCell[2] ;
+						 ;
 						break;
 					case Constants.RIGHT: // Move right
 						adjacentCell = currentCell;
