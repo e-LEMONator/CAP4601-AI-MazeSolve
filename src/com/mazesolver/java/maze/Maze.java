@@ -87,7 +87,10 @@ public class Maze
 					// Set the adjacent cell to the moveDirection from the current cell being evaluated
 					adjacentCell = this.getAdjacent(stack.peek(), adjacentMoveDirection);
 				} while(adjacentCell == null || visited.contains(adjacentCell));
-				
+
+				// TODO: Break the wall between current and adjacent cell
+
+
 				visited.add(stack.peek());  // add the adjacent cell into the visited list
 				stack.push(adjacentCell);  // push the adjacent cell into the stack
 			}
