@@ -1,4 +1,4 @@
-package com.mazesolver.java;
+package com.mazesolver.java.utilities;
 
 public class Constants
 {
@@ -12,6 +12,7 @@ public class Constants
 	public static final int WALL = 0;
 	public static final int OPEN = 1;
 
+	// length of one dimension of maze cells (excludes walls and bounds
 	private static int mazeSize;
 	
 	public static int getMazeSize()

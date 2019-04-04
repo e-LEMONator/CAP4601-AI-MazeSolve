@@ -1,6 +1,6 @@
 package com.mazesolver.java.maze;
 
-import com.mazesolver.java.Constants;
+import com.mazesolver.java.utilities.Constants;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class MazeCell
