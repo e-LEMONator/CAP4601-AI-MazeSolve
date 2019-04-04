@@ -121,7 +121,24 @@ public class Maze
 					adjacentCell = this.getAdjacent(stack.peek(), adjacentMoveDirection);
 				} while(adjacentCell == null || visited.contains(adjacentCell));
 
-				// TODO: Break the wall between current and adjacent cell
+				// change the wall to an open space at the correct edge
+				switch(adjacentMoveDirection)
+				{
+					case Constants.UP:
+						stack.peek().setUpEdge(Constants.OPEN);
+						break;
+					case Constants.RIGHT:
+						stack.peek().setRightEdge(Constants.OPEN);
+						break;
+					case Constants.DOWN:
+						stack.peek().setDownEdge(Constants.OPEN);
+						break;
+					case Constants.LEFT:
+						stack.peek().setLeftEdge(Constants.OPEN);
+						break;
+					default:
+						break;
+				}
 
 
 				visited.add(stack.peek());  // add the adjacent cell into the visited list
