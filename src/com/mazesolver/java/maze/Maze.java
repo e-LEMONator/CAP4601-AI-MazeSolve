@@ -12,14 +12,40 @@ public class Maze
 	
 	public Maze(int mazeSize)
 	{
+		 // references to previous cells to pass to new ones
+		MazeCell upCell, leftCell;
+		
 		Constants.setMazeSize(mazeSize);
 		this.mazeGrid = new MazeCell[mazeSize][mazeSize];
 		
+		// instantiate cells
 		for(int row = 0; row < Constants.getMazeSize(); row++)
 		{
 			for(int column = 0; column < Constants.getMazeSize(); column++)
 			{
-				this.mazeGrid[row][column] = new MazeCell(row, column);
+				if(row == 0)
+				{
+					// if on the top edge there is no cell above
+					upCell = null;
+				}
+				else
+				{
+					// otherwise set upCell to cell above
+					upCell = this.mazeGrid[row - 1][column];
+				}
+				
+				if(column == 0)
+				{
+					// if on left column there is no cell to the left
+					leftCell = null;
+				}
+				else
+				{
+					// otherwise set leftCell to the adjacent cell
+					leftCell = this.mazeGrid[row][column - 1];
+				}
+				
+				this.mazeGrid[row][column] = new MazeCell(row, column, upCell, leftCell);
 			}
 		}
 		

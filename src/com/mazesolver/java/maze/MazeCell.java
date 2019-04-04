@@ -1,60 +1,61 @@
 package com.mazesolver.java.maze;
 
 import com.mazesolver.java.Constants;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MazeCell
 {
 	private final int row;
 	private final int column;
 	private char symbol;
-	private int upEdge;
-	private int downEdge;
-	private int leftEdge;
-	private int rightEdge;
+	private AtomicInteger upEdge;
+	private AtomicInteger downEdge;
+	private AtomicInteger leftEdge;
+	private AtomicInteger rightEdge;
 	
-	public MazeCell(int row, int column)
+	public MazeCell(int row, int column, MazeCell upCell, MazeCell leftCell)
 	{
 		this.row = row;
 		this.column = column;
 		this.symbol = ' ';
-		this.setEdges();
+		this.setEdges(upCell, leftCell);
 	}
 	
 	/**
 	 * sets all the edges of the cell depending on its coordinates in the maze
 	 */
-	private void setEdges()
+	private void setEdges(MazeCell upCell, MazeCell leftCell)
 	{
 		if(this.row == 0)
 		{
-			this.upEdge = Constants.OOB;
-			this.downEdge = Constants.WALL;
+			this.upEdge.set(Constants.OOB);
+			this.downEdge.set(Constants.WALL);
 		}
 		else if(this.row == (Constants.getMazeSize() - 1))
 		{
-			this.upEdge = Constants.WALL;
-			this.downEdge = Constants.OOB;
+			this.upEdge = upCell.getDownEdge();
+			this.downEdge.set(Constants.OOB);
 		}
 		else
 		{
-			this.upEdge = Constants.WALL;
-			this.downEdge = Constants.WALL;
+			this.upEdge = upCell.getDownEdge();
+			this.downEdge.set(Constants.WALL);
 		}
 		
 		if(this.column == 0)
 		{
-			this.leftEdge = Constants.OOB;
-			this.rightEdge = Constants.WALL;
+			this.leftEdge.set(Constants.OOB);
+			this.rightEdge.set(Constants.WALL);
 		}
 		else if(this.column == (Constants.getMazeSize() - 1))
 		{
-			this.leftEdge = Constants.WALL;
-			this.rightEdge = Constants.OOB;
+			this.leftEdge = leftCell.getRightEdge();
+			this.rightEdge.set(Constants.OOB);
 		}
 		else
 		{
-			this.leftEdge = Constants.WALL;
-			this.rightEdge = Constants.WALL;
+			this.leftEdge = leftCell.getRightEdge();
+			this.rightEdge.set(Constants.WALL);
 		}
 	}
 	
@@ -76,13 +77,13 @@ public class MazeCell
 			case Constants.STAY:
 				return Constants.OPEN;
 			case Constants.UP:
-				return upEdge;
+				return this.upEdge.get();
 			case Constants.RIGHT:
-				return rightEdge;
+				return this.rightEdge.get();
 			case Constants.DOWN:
-				return downEdge;
+				return this.downEdge.get();
 			case Constants.LEFT:
-				return leftEdge;
+				return this.leftEdge.get();
 			default:
 				return Constants.OOB;
 		}
@@ -110,43 +111,45 @@ public class MazeCell
 		this.symbol = symbol;
 	}
 
-	public int getUpEdge()
+	public AtomicInteger getUpEdge()
 	{
 		return upEdge;
 	}
 
 	public void setUpEdge(int upEdge)
 	{
-		this.upEdge = upEdge;
+		this.upEdge.set(upEdge);
 	}
 
-	public int getDownEdge()
+	public AtomicInteger getDownEdge()
 	{
 		return downEdge;
 	}
 
 	public void setDownEdge(int downEdge)
 	{
-		this.downEdge = downEdge;
+		this.downEdge.set(downEdge);
 	}
 
-	public int getLeftEdge()
+	public AtomicInteger getLeftEdge()
 	{
 		return leftEdge;
 	}
 
 	public void setLeftEdge(int leftEdge)
 	{
-		this.leftEdge = leftEdge;
+		this.leftEdge.set(leftEdge);
 	}
 
-	public int getRightEdge()
+	public AtomicInteger getRightEdge()
 	{
 		return rightEdge;
 	}
 
 	public void setRightEdge(int rightEdge)
 	{
-		this.rightEdge = rightEdge;
+		this.rightEdge.set(rightEdge);
 	}
+	
+	
 }
