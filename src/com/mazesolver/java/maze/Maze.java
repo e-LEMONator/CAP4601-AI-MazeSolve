@@ -103,9 +103,7 @@ public class Maze
 				// If the stack depth is greater than the current maxDepth and the
 				// current cell at the top of the stack is on an edge, update maxDepth
 				// and set the finish point to that cell in order to have the longest maze solution
-				// TODO: Add logic to the if to check if the top of
-				//  the stack is at a boundary edge
-				if(stack.size() > maxDepth)
+				if(stack.size() > maxDepth && stack.peek().isOnBoundary())
 				{
 					maxDepth = stack.size();
 					this.finish = stack.peek();

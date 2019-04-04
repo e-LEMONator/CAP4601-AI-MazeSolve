@@ -150,6 +150,13 @@ public class MazeCell
 	{
 		this.rightEdge.set(rightEdge);
 	}
-	
-	
+
+	// Check to see if cell is on a boundary
+	public boolean isOnBoundary()
+	{
+		return (this.upEdge.get() == Constants.OOB) ||
+				(this.downEdge.get() == Constants.OOB) ||
+				(this.leftEdge.get() == Constants.OOB) ||
+				(this.rightEdge.get() == Constants.OOB);
+	}
 }
