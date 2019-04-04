@@ -10,6 +10,7 @@ public class Maze
 	private MazeCell start;
 	private MazeCell finish;
 	
+	// Instantiate every cell in the maze logic
 	public Maze(int mazeSize)
 	{
 		Constants.setMazeSize(mazeSize);
@@ -25,7 +26,9 @@ public class Maze
 		
 		selectRandomStart();
 	}
-	
+
+	// Select a random cell on the outside border of the maze to use as
+	// the beginning of the maze
 	private void selectRandomStart()
 	{
 		Random rand = new Random();
@@ -71,15 +74,19 @@ public class Maze
 				  !visited.contains(this.getAdjacent(stack.peek(), Constants.LEFT)))
 			{
 
-				// If the stack depth is greater than the current maxDepth, update maxDepth
+				// If the stack depth is greater than the current maxDepth and the
+				// current cell at the top of the stack is on an edge, update maxDepth
 				// and set the finish point to that cell in order to have the longest maze solution
+				// TODO: Add logic to the if to check if the top of
+				//  the stack is at a boundary edge
 				if(stack.size() > maxDepth)
 				{
 					maxDepth = stack.size();
 					this.finish = stack.peek();
 				}
 
-				// TODO: Comment this do while
+				// generates random moves until one leads to an unexplored
+				// cell within the bounds of the maze
 				do
 				{					
 					adjacentMoveDirection = rand.nextInt(4) + 1;
