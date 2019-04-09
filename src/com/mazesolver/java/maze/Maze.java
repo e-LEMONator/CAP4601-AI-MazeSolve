@@ -50,7 +50,8 @@ public class Maze
 			}
 		}
 		
-		selectRandomStart();
+		this.selectRandomStart();
+		this.generateMaze();
 	}
 
 	// Select a random cell on the outside border of the maze to use as
@@ -76,7 +77,8 @@ public class Maze
 				break;
 		}
 	}
-
+	
+	// TODO: implement generateMaze
 	private void generateMaze()
 	{
 		Stack<MazeCell> stack = new Stack();  // For keeping track of where we need to go
@@ -93,31 +95,37 @@ public class Maze
 		do
 		{
 			// While the adjacent cells have not been visited, visit the cells and add to stack
-			while(!visited.contains(this.getAdjacent(stack.peek(), Constants.UP)) ||
-				  !visited.contains(this.getAdjacent(stack.peek(), Constants.RIGHT)) ||
-				  !visited.contains(this.getAdjacent(stack.peek(), Constants.DOWN)) ||
-				  !visited.contains(this.getAdjacent(stack.peek(), Constants.LEFT)))
+			while(!(((adjacentCell = this.getAdjacent(stack.peek(), Constants.UP)) == null) || visited.contains(adjacentCell)) ||
+				  !(((adjacentCell = this.getAdjacent(stack.peek(), Constants.RIGHT)) == null) || visited.contains(adjacentCell)) ||
+				  !(((adjacentCell = this.getAdjacent(stack.peek(), Constants.DOWN)) == null) || visited.contains(adjacentCell)) ||
+				  !(((adjacentCell = this.getAdjacent(stack.peek(), Constants.LEFT)) == null) || visited.contains(adjacentCell)))
 			{
-
 				// If the stack depth is greater than the current maxDepth and the
 				// current cell at the top of the stack is on an edge, update maxDepth
 				// and set the finish point to that cell in order to have the longest maze solution
-				if(stack.size() > maxDepth && stack.peek().isOnBoundary())
+				if((stack.size() > maxDepth) && stack.peek().isOnBoundary())
 				{
 					maxDepth = stack.size();
 					this.finish = stack.peek();
 				}
 
+				System.out.printf("current cell: [%d,%d]\n", stack.peek().getRow(), stack.peek().getColumn());
+				
 				// generates random moves until one leads to an unexplored
 				// cell within the bounds of the maze
 				do
 				{					
 					adjacentMoveDirection = rand.nextInt(4) + 1;
-
+					
+					System.out.println(adjacentMoveDirection);
+					
 					// Set the adjacent cell to the moveDirection from the current cell being evaluated
 					adjacentCell = this.getAdjacent(stack.peek(), adjacentMoveDirection);
+					
 				} while(adjacentCell == null || visited.contains(adjacentCell));
-
+				
+				System.out.println("Done");
+				
 				// change the wall to an open space at the correct edge
 				switch(adjacentMoveDirection)
 				{
@@ -137,12 +145,14 @@ public class Maze
 						break;
 				}
 
-
 				visited.add(stack.peek());  // add the adjacent cell into the visited list
 				stack.push(adjacentCell);  // push the adjacent cell into the stack
 			}
 
+			System.out.printf("Popping cell: [%d,%d]\n", stack.peek().getRow(), stack.peek().getColumn());
+			
 			// pop the stack to backtrack if no adjacent cells have not been visited
+			visited.add(stack.peek());
 			stack.pop();
 
 		} while(!stack.isEmpty());
@@ -180,4 +190,12 @@ public class Maze
 		
 		return null;
 	}
+	
+	// TODO: implement printMaze
+
+	public MazeCell[][] getMazeGrid()
+	{
+		return mazeGrid;
+	}
+
 }

@@ -18,6 +18,10 @@ public class MazeCell
 		this.row = row;
 		this.column = column;
 		this.symbol = ' ';
+		this.upEdge = new AtomicInteger();
+		this.rightEdge = new AtomicInteger();
+		this.downEdge = new AtomicInteger();
+		this.leftEdge = new AtomicInteger();
 		this.setEdges(upCell, leftCell);
 	}
 	
