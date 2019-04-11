@@ -28,7 +28,7 @@ public class MazePrinter
 		{
 			currentCell = maze.getMazeGrid()[0][column];
 
-			System.out.printf("%c%c", ((currentCell.getUpEdge().get() < 1) ? '-' : ' '), '#');
+			System.out.printf("%s%c", ((currentCell.getUpEdge().get() < 1) ? "---" : "   "), '#');
 		}
 
 		System.out.printf("\n");
@@ -44,7 +44,7 @@ public class MazePrinter
 		{
 			currentCell = maze.getMazeGrid()[row][column];
 
-			System.out.printf("%c%c", currentCell.getSymbol(), ((currentCell.getRightEdge().get() < 1) ? '|' : ' '));
+			System.out.printf(" %c %c", currentCell.getSymbol(), ((currentCell.getRightEdge().get() < 1) ? '|' : ' '));
 		}
 
 		System.out.printf("\n");
@@ -60,7 +60,7 @@ public class MazePrinter
 		{
 			currentCell = maze.getMazeGrid()[row][column];
 
-			System.out.printf("%c%c", ((currentCell.getDownEdge().get() < 1) ? '-' : ' '), '#');
+			System.out.printf("%s%c", ((currentCell.getDownEdge().get() < 1) ? "---" : "   "), '#');
 		}
 
 		System.out.printf("\n");
