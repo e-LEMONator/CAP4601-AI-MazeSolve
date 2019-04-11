@@ -77,8 +77,7 @@ public class Maze
 				break;
 		}
 	}
-	
-	// TODO: implement generateMaze
+
 	private void generateMaze()
 	{
 		Stack<MazeCell> stack = new Stack();  // For keeping track of where we need to go
