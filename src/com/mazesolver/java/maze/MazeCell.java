@@ -102,8 +102,6 @@ public class MazeCell
 	{
 		return column;
 	}
-
-	
 	
 	public char getSymbol()
 	{
@@ -155,7 +153,11 @@ public class MazeCell
 		this.rightEdge.set(rightEdge);
 	}
 
-	// Check to see if cell is on a boundary
+	/**
+	 * checks if a cell is on the edge of the maze
+	 * 
+	 * @return true if the cell is on a boundary and false if it is not
+	 */
 	public boolean isOnBoundary()
 	{
 		return (this.upEdge.get() == Constants.OOB) ||

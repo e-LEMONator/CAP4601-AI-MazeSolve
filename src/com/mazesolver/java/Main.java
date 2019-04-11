@@ -5,7 +5,6 @@ import com.mazesolver.java.utilities.MazePrinter;
 
 public class Main
 {
-
     public static void main(String[] args)
 	{
 		Maze maze = new Maze(10);
@@ -13,4 +12,5 @@ public class Main
 		MazePrinter.printMaze(maze);
     }
 	
+	// TODO: add argument handling for maze size and debug mode
 }
