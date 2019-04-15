@@ -4,7 +4,7 @@ import com.mazesolver.java.maze.Maze;
 
 public abstract class Solver
 {
-	private Maze maze;
+	public Maze maze;
 
 	public Solver(Maze maze)
 	{

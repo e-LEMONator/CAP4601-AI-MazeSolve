@@ -7,8 +7,8 @@ import java.util.*;
 public class Maze
 {
 	private MazeCell[][] mazeGrid;
-	private MazeCell start;
-	private MazeCell finish;
+	public MazeCell start;
+	public MazeCell finish;
 	
 	// Instantiate every cell in the maze logic
 	public Maze(int mazeSize)
@@ -89,7 +89,7 @@ public class Maze
 
 		// Add the starting point to the stack
 		stack.push(this.start);
-		
+
 		// Perform maze Generation logic until our stack is empty
 		do
 		{
