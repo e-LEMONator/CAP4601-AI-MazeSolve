@@ -187,7 +187,7 @@ public class Maze
 	 * @param move the direction we need to move to get our adjacent cell
 	 * @return cell in the move selection or null if there is none valid
 	 */
-	private MazeCell getAdjacent(MazeCell currentCell, int move)
+	public MazeCell getAdjacent(MazeCell currentCell, int move)
 	{
 		int row, column;
 

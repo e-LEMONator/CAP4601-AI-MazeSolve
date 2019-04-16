@@ -1,7 +1,7 @@
 package com.mazesolver.java;
 
 import com.mazesolver.java.maze.Maze;
-import com.mazesolver.java.utilities.MazePrinter;
+import com.mazesolver.java.solver.UniformCostSearch;
 
 public class Main
 {
@@ -9,7 +9,9 @@ public class Main
 	{
 		Maze maze = new Maze(10);
 		
-		MazePrinter.printMaze(maze);
+		UniformCostSearch ucsSolver = new UniformCostSearch(maze);
+		
+		ucsSolver.solve();
     }
 	
 	// TODO: add argument handling for maze size and debug mode
