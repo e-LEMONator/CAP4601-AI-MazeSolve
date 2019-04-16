@@ -7,8 +7,8 @@ import java.util.*;
 public class Maze
 {
 	private MazeCell[][] mazeGrid;
-	public MazeCell start;
-	public MazeCell finish;
+	private MazeCell start;
+	private MazeCell finish;
 	
 	// Instantiate every cell in the maze logic
 	public Maze(int mazeSize)
@@ -223,5 +223,15 @@ public class Maze
 	public MazeCell[][] getMazeGrid()
 	{
 		return mazeGrid;
+	}
+
+	public MazeCell getStart()
+	{
+		return start;
+	}
+
+	public MazeCell getFinish()
+	{
+		return finish;
 	}
 }
