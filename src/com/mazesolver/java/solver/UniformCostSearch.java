@@ -27,12 +27,12 @@ public class UniformCostSearch extends Solver
 		while(!queue.isEmpty())
 		{
 			MazePrinter.printMaze(this.maze);
-			
+
 			currentPair = queue.poll();
-			
+
 			currentPair.getCell().setSymbol('@');
-			
-			// if the queue is at the finish of the maze, return the solution
+
+			// if the queue is at the finish of the maze, break
 			if(currentPair.getCell().equals(this.maze.getFinish()))
 			{
 				break;
@@ -50,10 +50,8 @@ public class UniformCostSearch extends Solver
 			}
 
 			visited.add(currentPair.getCell());
-			
+
 			currentPair.getCell().setSymbol('*');
 		}
 	}
 }
-
-
