@@ -30,7 +30,7 @@ public class UniformCostSearch extends Solver
 		// Perform while frontier queue is not empty
 		while (!queue.isEmpty())
 		{
-			// if the queue is at the finish of the maze, return the solution
+			// if the queue is at the finish of the maze, break
 			if (queue.peek() == maze.getFinish())
 			{
 				//TODO: return solution
