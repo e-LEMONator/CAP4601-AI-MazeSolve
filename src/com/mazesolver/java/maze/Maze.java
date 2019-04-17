@@ -55,6 +55,20 @@ public class Maze
 		this.selectRandomStart();
 		this.generateMaze();
 	}
+	
+	/*
+	public Maze(Maze mazeToCopy)
+	{
+		this.mazeGrid = new MazeCell[Constants.getMazeSize()][Constants.getMazeSize()];
+		
+		for(int row = 0; row < Constants.getMazeSize(); row++)
+		{
+			for(int column = 0; column < Constants.getMazeSize(); column++)
+			{
+				this.mazeGrid[row][column] = new MazeCell(mazeToCopy[row][column]);
+			}
+		}
+	}*/
 
 	/**
 	 * finds a random edge cell and sets the start value to it
@@ -92,7 +106,7 @@ public class Maze
 		Stack<MazeCell> stack = new Stack();  // For keeping track of where we need to go
 		ArrayList<MazeCell> visited = new ArrayList();  // For making sure not to visit a previous cell
 		Random rand = new Random();
-		int adjacentMoveDirection;  // The direction of the next adjacent cell for evaluation
+		int moveDirection;  // The direction of the next adjacent cell for evaluation
 		MazeCell adjacentCell;
 		int maxDepth = 0;
 
@@ -117,15 +131,15 @@ public class Maze
 				// cell within the bounds of the maze
 				do
 				{
-					adjacentMoveDirection = rand.nextInt(4) + 1;
+					moveDirection = rand.nextInt(4) + 1;
 
 					if(Constants.isDebugMode())
 					{
-						System.out.printf("Randomly generatend move direction: %d\n", adjacentMoveDirection);
+						System.out.printf("Randomly generatend move direction: %d\n", moveDirection);
 					}
 
 					// Set the adjacent cell to the moveDirection from the current cell being evaluated
-					adjacentCell = this.getAdjacent(stack.peek(), adjacentMoveDirection);
+					adjacentCell = this.getAdjacent(stack.peek(), moveDirection);
 
 				} while(adjacentCell == null || visited.contains(adjacentCell));
 
@@ -135,7 +149,7 @@ public class Maze
 				}
 
 				// change the wall to an open space at the correct edge
-				switch(adjacentMoveDirection)
+				switch(moveDirection)
 				{
 					case Constants.UP:
 						stack.peek().setUpEdge(Constants.OPEN);

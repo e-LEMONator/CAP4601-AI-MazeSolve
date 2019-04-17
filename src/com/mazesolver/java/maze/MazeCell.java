@@ -25,6 +25,14 @@ public class MazeCell
 		this.setEdges(upCell, leftCell);
 	}
 	
+	/*public MazeCell(MazeCell mazeCellToCopy)
+	{
+		this.row = mazeCellToCopy.row;
+		this.column = mazeCellToCopy.column;
+		this.symbol = mazeCellToCopy.symbol;
+		this.upEdge
+	}*/
+	
 	/**
 	 * sets all the edges of the cell depending on its coordinates in the maze
 	 */

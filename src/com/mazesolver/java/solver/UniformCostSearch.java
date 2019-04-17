@@ -17,41 +17,57 @@ public class UniformCostSearch extends Solver
 	{
 		//expand node with smallest path cost
 		//(equal for the maze due to the path cost being uniformly 1 in all directions)
-		PriorityQueue<MazeCellPair> queue = new PriorityQueue<>();
+		PriorityQueue<PriorityQueueNode> queue = new PriorityQueue<>();
 		ArrayList<MazeCell> visited = new ArrayList();  // For making sure not to visit a previous cell
-		MazeCellPair currentPair = new MazeCellPair(this.maze.getStart(), 0);
+		PriorityQueueNode currentNode = new PriorityQueueNode(this.maze.getStart(), 0, 0);
 
-		queue.add(currentPair);
+		queue.add(currentNode);
 
 		// Perform while frontier queue is not empty
 		while(!queue.isEmpty())
 		{
+			// update the current node to the least cost neighbor
+			currentNode = queue.poll();
+
+			// change the nodes symbol to indicate current node
+			if(!(currentNode.getCell().equals(this.maze.getStart())) && !(currentNode.getCell().equals(this.maze.getFinish())))
+			{
+				currentNode.getCell().setSymbol('@');
+			}
+
 			MazePrinter.printMaze(this.maze);
-
-			currentPair = queue.poll();
-
-			currentPair.getCell().setSymbol('@');
-
+			
 			// if the queue is at the finish of the maze, break
-			if(currentPair.getCell().equals(this.maze.getFinish()))
+			if(currentNode.getCell().equals(this.maze.getFinish()))
 			{
 				break;
 			}
 
 			//iterate through all 4 directions to see if the children nodes are valid moves
 			// and if they should be expanded
-			for(int direction = 1; direction <= 4; direction++)
+			for(int moveDirection = 1; moveDirection <= 4; moveDirection++)
 			{
-				if((currentPair.getCell().checkMove(direction) == Constants.OPEN) &&
-						!visited.contains(currentPair.getCell()))
+				if((currentNode.getCell().checkMove(moveDirection) == Constants.OPEN) &&
+						!visited.contains(this.maze.getAdjacent(currentNode.getCell(), moveDirection)))
 				{
-					queue.add(new MazeCellPair(this.maze.getAdjacent(currentPair.getCell(), direction), currentPair.getDepth() + 1));
+					queue.add(createAdjNode(currentNode, moveDirection));
 				}
 			}
 
-			visited.add(currentPair.getCell());
+			visited.add(currentNode.getCell());
 
-			currentPair.getCell().setSymbol('*');
+			// change the nodes symbol to indicate the node has been visited
+			if(!(currentNode.getCell().equals(this.maze.getStart())) && !(currentNode.getCell().equals(this.maze.getFinish())))
+			{
+				currentNode.getCell().setSymbol('*');
+			}
 		}
+	}
+	
+	PriorityQueueNode createAdjNode(PriorityQueueNode currentNode, int moveDirection)
+	{
+		MazeCell adjacentCell = this.maze.getAdjacent(currentNode.getCell(), moveDirection);
+		int adjacentDepth = currentNode.getDepth() + 1;
+		return new PriorityQueueNode(adjacentCell, adjacentDepth, adjacentDepth);
 	}
 }
