@@ -12,5 +12,7 @@ public class WallFollowerSolver extends Solver
 	public void solve()
 	{
 
+		// clear the maze for the next solver method to have a fresh solution
+		this.maze.clearMaze();
 	}
 }
