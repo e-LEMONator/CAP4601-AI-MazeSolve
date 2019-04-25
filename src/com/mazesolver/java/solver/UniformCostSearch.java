@@ -68,6 +68,6 @@ public class UniformCostSearch extends Solver
 	{
 		MazeCell adjacentCell = this.maze.getAdjacent(currentNode.getCell(), moveDirection);
 		int adjacentDepth = currentNode.getDepth() + 1;
-		return new PriorityQueueNode(adjacentCell, adjacentDepth, adjacentDepth);
+		return new PriorityQueueNode(adjacentCell, adjacentDepth);
 	}
 }

@@ -8,6 +8,13 @@ public class PriorityQueueNode implements Comparable<PriorityQueueNode>
 	private final int cost;
 	private final int depth;
 
+	public PriorityQueueNode(MazeCell cell, int cost)
+	{
+		this.cell = cell;
+		this.cost = cost;
+		this.depth = cost;
+	}
+	
 	public PriorityQueueNode(MazeCell cell, int cost, int depth)
 	{
 		this.cell = cell;
@@ -22,13 +29,13 @@ public class PriorityQueueNode implements Comparable<PriorityQueueNode>
 		{
 			return 1;
 		}
-		else if(this.cost == o.cost)
+		else if(this.cost < o.cost)
 		{
-			return 0;
+			return -1;
 		}
 		else
 		{
-			return -1;
+			return 0;
 		}
 	}
 

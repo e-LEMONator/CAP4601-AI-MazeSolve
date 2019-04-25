@@ -55,20 +55,6 @@ public class Maze
 		this.selectRandomStart();
 		this.generateMaze();
 	}
-	
-	/*
-	public Maze(Maze mazeToCopy)
-	{
-		this.mazeGrid = new MazeCell[Constants.getMazeSize()][Constants.getMazeSize()];
-		
-		for(int row = 0; row < Constants.getMazeSize(); row++)
-		{
-			for(int column = 0; column < Constants.getMazeSize(); column++)
-			{
-				this.mazeGrid[row][column] = new MazeCell(mazeToCopy[row][column]);
-			}
-		}
-	}*/
 
 	/**
 	 * finds a random edge cell and sets the start value to it
@@ -232,6 +218,17 @@ public class Maze
 		}
 
 		return null;
+	}
+	
+	/**
+	 * calculates Manhattan distance
+	 * 
+	 * @param currentCell cell to start measuring the distance from
+	 * @return distance from current cell to finish
+	 */
+	public int getDistToFinish(MazeCell currentCell)
+	{
+		return Math.abs(this.getFinish().getRow() - currentCell.getRow()) + Math.abs(this.getFinish().getColumn() - currentCell.getColumn());
 	}
 
 	public MazeCell[][] getMazeGrid()

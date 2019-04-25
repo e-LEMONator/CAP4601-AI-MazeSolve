@@ -7,7 +7,7 @@ public class Main
 {
     public static void main(String[] args)
 	{
-		Maze maze = new Maze(10);
+		Maze maze = new Maze(100);
 		
 		//UniformCostSearch ucsSolver = new UniformCostSearch(maze);
 		AStar astar = new AStar(maze);

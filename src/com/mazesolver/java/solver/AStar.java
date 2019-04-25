@@ -14,13 +14,7 @@ public class AStar extends UniformCostSearch
 	{
 		MazeCell adjacentCell = this.maze.getAdjacent(currentNode.getCell(), moveDirection);
 		int adjacentDepth = currentNode.getDepth() + 1;
-		int adjacentCost = adjacentDepth + getDistToFinish(adjacentCell); 
+		int adjacentCost = adjacentDepth + this.maze.getDistToFinish(adjacentCell); 
 		return new PriorityQueueNode(adjacentCell, adjacentCost, adjacentDepth);
-	}
-	
-	private int getDistToFinish(MazeCell currentCell)
-	{
-		return Math.abs(this.maze.getFinish().getRow() - currentCell.getRow()) +
-				Math.abs(this.maze.getFinish().getColumn() - currentCell.getColumn());
 	}
 }
