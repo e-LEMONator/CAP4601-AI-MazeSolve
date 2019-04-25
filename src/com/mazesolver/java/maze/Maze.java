@@ -11,15 +11,12 @@ public class Maze
 	private MazeCell finish;
 	
 	// Instantiate every cell in the maze logic
-	public Maze(int mazeSize)
+	public Maze()
 	{
 		// references to previous cells to pass to new ones
 		MazeCell upCell, leftCell;
 
-		// set the static variable in constants for the maze size
-		Constants.setMazeSize(mazeSize);
-
-		this.mazeGrid = new MazeCell[mazeSize][mazeSize];
+		this.mazeGrid = new MazeCell[Constants.getMazeSize()][Constants.getMazeSize()];
 
 		// instantiate cells
 		for(int row = 0; row < Constants.getMazeSize(); row++)
@@ -244,5 +241,16 @@ public class Maze
 	public MazeCell getFinish()
 	{
 		return finish;
+	}
+
+	public void clearMaze()
+	{
+		for (int i = 0; i < mazeGrid.length; i++)
+		{
+			for (int j = 0; j <mazeGrid[i].length; j++)
+			{
+				mazeGrid[i][j].setSymbol(' ');
+			}
+		}
 	}
 }
