@@ -62,6 +62,8 @@ public class UniformCostSearch extends Solver
 				currentNode.getCell().setSymbol('*');
 			}
 		}
+		// clear the maze for the next solver method to have a fresh solution
+		this.maze.clearMaze();
 	}
 	
 	PriorityQueueNode createAdjNode(PriorityQueueNode currentNode, int moveDirection)

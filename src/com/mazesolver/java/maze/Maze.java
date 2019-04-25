@@ -248,4 +248,15 @@ public class Maze
 	{
 		return finish;
 	}
+
+	public void clearMaze()
+	{
+		for (int i = 0; i < mazeGrid.length; i++)
+		{
+			for (int j = 0; j <mazeGrid[i].length; j++)
+			{
+				mazeGrid[i][j].setSymbol(' ');
+			}
+		}
+	}
 }
