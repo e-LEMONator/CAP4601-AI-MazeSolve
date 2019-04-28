@@ -15,10 +15,7 @@ public class Main
 		// Instantiate new maze
 		Maze maze = new Maze();
 
-		//UniformCostSearch ucsSolver = new UniformCostSearch(maze);
-		AStar astar = new AStar(maze);
-
-		astar.solve();
+		IOHandler.menu();
     }
 
 	// TODO: add argument handling for maze size and debug mode

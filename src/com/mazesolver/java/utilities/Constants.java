@@ -17,8 +17,11 @@ public class Constants
 	// length of one dimension of maze cells (excludes walls and bounds
 	private static int mazeSize;
 	
-	// controlls various print statements
+	// controls various print statements
 	private static boolean debugMode = false;
+
+	// controls if the maze solver should continue running
+	private static boolean programOver = false;
 	
 	public static int getMazeSize()
 	{
@@ -38,5 +41,15 @@ public class Constants
 	public static void setDebugMode(boolean debugMode)
 	{
 		Constants.debugMode = debugMode;
+	}
+
+	public static boolean isProgramOver()
+	{
+		return programOver;
+	}
+
+	public static void setProgramOver(boolean programOver)
+	{
+		Constants.programOver = programOver;
 	}
 }
