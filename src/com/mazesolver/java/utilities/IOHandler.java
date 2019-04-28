@@ -1,6 +1,11 @@
 package com.mazesolver.java.utilities;
 
+import com.mazesolver.java.Main;
+import com.mazesolver.java.maze.Maze;
+import com.mazesolver.java.solver.AStar;
+import com.mazesolver.java.solver.Genetic;
 import com.mazesolver.java.solver.UniformCostSearch;
+import com.mazesolver.java.solver.WallFollowerSolver;
 
 import java.security.InvalidParameterException;
 import java.util.Scanner;
@@ -16,16 +21,17 @@ public class IOHandler
 		{
 			switch (args.length)
 			{
-				case 3:
-					if (!args[2].equals("-d"))
+				case 2:
+					if (!args[1].equals("-d"))
 					{
 						throw new NumberFormatException();
 					} else
 					{
 						Constants.setDebugMode(true);
 					}
-				case 2:
-					mazeSize = Integer.parseInt(args[1]);
+					break;
+				case 1:
+					mazeSize = Integer.parseInt(args[0]);
 
 					if ((mazeSize < 2) || (mazeSize > 1000))  //throw exception if number format invalid
 					{
@@ -33,6 +39,7 @@ public class IOHandler
 					}
 
 					Constants.setMazeSize(mazeSize);
+					break;
 				default:
 					throw new NumberFormatException();
 
@@ -46,7 +53,7 @@ public class IOHandler
 		}
 	}
 
-	public static void menu()
+	public static void menu(Maze maze)
 	{
 		System.out.println("Welcome to the Maze Generator/Solver!\n");
 
@@ -58,11 +65,11 @@ public class IOHandler
 			System.out.println("Press 4 for Wall Follower Method\n");
 			System.out.println("Press q to quit the program\n");
 
-			selectSolver();
+			selectSolver(maze);
 		}
 	}
 
-	private static void selectSolver()
+	private static void selectSolver(Maze maze)
 	{
 		char selection;
 
@@ -75,18 +82,26 @@ public class IOHandler
 			switch (selection)
 			{
 				case '1':
-					//solution method
+					UniformCostSearch ucs = new UniformCostSearch(maze);
+
+					ucs.solve();
 					break;
 
 				case '2':
-					//solution method
+					AStar aStar = new AStar(maze);
+
+					aStar.solve();
 					break;
 
 				case '3':
-					//solution method
+					Genetic genetic = new Genetic(maze);
+
+					genetic.solve();
 					break;
 				case '4':
-					//solution method
+					WallFollowerSolver wallFollower = new WallFollowerSolver(maze);
+
+					wallFollower.solve();
 					break;
 				case 'q':
 				case 'Q':

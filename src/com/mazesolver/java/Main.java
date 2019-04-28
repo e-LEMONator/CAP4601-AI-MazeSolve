@@ -15,8 +15,6 @@ public class Main
 		// Instantiate new maze
 		Maze maze = new Maze();
 
-		IOHandler.menu();
+		IOHandler.menu(maze);
     }
-
-	// TODO: add argument handling for maze size and debug mode
 }
