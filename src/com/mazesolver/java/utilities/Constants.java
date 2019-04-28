@@ -16,6 +16,9 @@ public class Constants
 
 	// length of one dimension of maze cells (excludes walls and bounds
 	private static int mazeSize;
+
+	// used to send starting border to the solver method
+	public static int startingBorder;
 	
 	// controls various print statements
 	private static boolean debugMode = false;
@@ -31,6 +34,16 @@ public class Constants
 	public static void setMazeSize(int mazeSize)
 	{
 		Constants.mazeSize = mazeSize;
+	}
+
+	public static int getStartingBorder()
+	{
+		return startingBorder;
+	}
+
+	public static void setStartingBorder(int startingBorder)
+	{
+		Constants.startingBorder = startingBorder;
 	}
 
 	public static boolean isDebugMode()
