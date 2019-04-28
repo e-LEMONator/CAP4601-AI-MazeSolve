@@ -29,6 +29,14 @@ public class IOHandler
 					{
 						Constants.setDebugMode(true);
 					}
+					mazeSize = Integer.parseInt(args[0]);
+
+					if ((mazeSize < 2) || (mazeSize > 1000))  //throw exception if number format invalid
+					{
+						throw new NumberFormatException();
+					}
+
+					Constants.setMazeSize(mazeSize);
 					break;
 				case 1:
 					mazeSize = Integer.parseInt(args[0]);
