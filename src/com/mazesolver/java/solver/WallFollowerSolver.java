@@ -17,22 +17,21 @@ public class WallFollowerSolver extends Solver
 	{
 		MazeCell currentCell = this.maze.getStart();
 		int currentDirection;
-		ArrayList<MazeCell> visited = new ArrayList();  // For making sure not to visit a previous cell
 
 		// switch the starting border to determine the right-hand move priority
-		switch (Constants.getStartingBorder())
+		switch (Maze.getStartingBorder())
 		{
 			case Constants.UP: // top bound
-				currentDirection = Constants.LEFT;
+				currentDirection = Constants.DOWN;
 				break;
 			case Constants.RIGHT: // right bound
-				currentDirection = Constants.UP;
+				currentDirection = Constants.LEFT;
 				break;
 			case Constants.DOWN: // bottom bound
-				currentDirection = Constants.RIGHT;
+				currentDirection = Constants.UP;
 				break;
 			case Constants.LEFT: // left bound
-				currentDirection = Constants.DOWN;
+				currentDirection = Constants.RIGHT;
 				break;
 			default:
 				break;
