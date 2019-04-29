@@ -21,7 +21,7 @@ public class Individual implements Comparable<Individual>
 	{
 		Random rand = new Random();
 
-		for (int chromosome : this.gene)
+		for(int chromosome : this.gene)
 		{
 			chromosome = rand.nextInt(5);
 		}

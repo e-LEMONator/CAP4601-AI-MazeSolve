@@ -1,6 +1,7 @@
 package com.mazesolver.java.solver;
 
 import com.mazesolver.java.maze.Maze;
+import java.util.Arrays;
 
 import java.util.PriorityQueue;
 
@@ -24,16 +25,16 @@ public class Genetic extends Solver
 	public void solve()
 	{
 		// create randomized population
-		for(Individual individual : this.population)
+		for(int i = 0; i < this.populationSize; i++)
 		{
-			individual = new Individual(this.maze);
+			this.population.add(new Individual(this.maze));
 		}
 
 		// while best solution is greater than 0
 		while(this.population.peek().evaluateGene() > 0)
 		{
 			select();
-			
+			break;
 			// crossover
 			// mutate
 		}
@@ -41,14 +42,19 @@ public class Genetic extends Solver
 	
 	private void select()
 	{
-		Individual individualArray[] = (Individual[]) this.population.toArray();
+		Individual individualArray[] = new Individual[this.populationSize];
+		individualArray = this.population.toArray(individualArray);
 		
 		this.population.clear();
 		
-		for(int i = 0; i < (this.populationSize * this.populationRetention); i++)
+		for(int i = 0; i < this.populationSize * this.populationRetention; i++)
 		{
-			System.out.println(individualArray[i].evaluateGene());
 			this.population.add(individualArray[i]);
+		}
+		
+		for(Individual individual : individualArray)
+		{
+			System.out.println(individual.evaluateGene());
 		}
 	}
 	
