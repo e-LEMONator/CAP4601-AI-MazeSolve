@@ -67,7 +67,7 @@ public class IOHandler
 	{
 		System.out.println("Welcome to the Maze Generator/Solver!\n");
 
-		while (!Constants.isProgramOver())
+		while(!Constants.isProgramOver())
 		{
 			System.out.println("Press 1 for Uniform Cost Search");
 			System.out.println("Press 2 for A* Heuristic Search");
@@ -89,7 +89,7 @@ public class IOHandler
 		{
 			selection = sc.next().charAt(0);
 
-			switch (selection)
+			switch(selection)
 			{
 				case '1':
 					UniformCostSearch ucs = new UniformCostSearch(maze);
@@ -119,10 +119,9 @@ public class IOHandler
 					break;
 				default:
 					throw new InvalidParameterException();
-
 			}
 		}
-		catch (InvalidParameterException e)
+		catch(InvalidParameterException e)
 		{
 			System.out.println("Invalid entry. Please try again, making sure to enter only one character.");
 		}
