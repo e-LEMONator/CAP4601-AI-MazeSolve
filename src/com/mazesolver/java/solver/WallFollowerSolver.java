@@ -23,16 +23,16 @@ public class WallFollowerSolver extends Solver
 		switch (Constants.getStartingBorder())
 		{
 			case Constants.UP: // top bound
-
+				currentDirection = Constants.LEFT;
 				break;
 			case Constants.RIGHT: // right bound
-
+				currentDirection = Constants.UP;
 				break;
 			case Constants.DOWN: // bottom bound
-
+				currentDirection = Constants.RIGHT;
 				break;
 			case Constants.LEFT: // left bound
-
+				currentDirection = Constants.DOWN;
 				break;
 			default:
 				break;
