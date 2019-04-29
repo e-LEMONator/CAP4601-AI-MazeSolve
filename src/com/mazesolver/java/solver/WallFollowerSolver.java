@@ -40,8 +40,11 @@ public class WallFollowerSolver extends Solver
 		// clear the maze for the next solver method to have a fresh solution
 		this.maze.clearMaze();
 	}
-	private void movePriority()
+	private void movePriority(MazeCell currentCell, int currentDirection)
 	{
+		while (currentCell != this.maze.getFinish())
+		{
 
+		}
 	}
 }
