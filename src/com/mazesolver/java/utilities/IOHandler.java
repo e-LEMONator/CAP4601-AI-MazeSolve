@@ -1,6 +1,5 @@
 package com.mazesolver.java.utilities;
 
-import com.mazesolver.java.Main;
 import com.mazesolver.java.maze.Maze;
 import com.mazesolver.java.solver.AStar;
 import com.mazesolver.java.solver.Genetic;
@@ -19,19 +18,21 @@ public class IOHandler
 
 		try
 		{
-			switch (args.length)
+			switch(args.length)
 			{
 				case 2:
-					if (!args[1].equals("-d"))
+					if(!args[1].equals("-d"))
 					{
 						throw new NumberFormatException();
-					} else
+					}
+					else
 					{
 						Constants.setDebugMode(true);
 					}
+					
 					mazeSize = Integer.parseInt(args[0]);
 
-					if ((mazeSize < 2) || (mazeSize > 1000))  //throw exception if number format invalid
+					if((mazeSize < 2) || (mazeSize > 1000))  //throw exception if number format invalid
 					{
 						throw new NumberFormatException();
 					}
@@ -41,7 +42,7 @@ public class IOHandler
 				case 1:
 					mazeSize = Integer.parseInt(args[0]);
 
-					if ((mazeSize < 2) || (mazeSize > 1000))  //throw exception if number format invalid
+					if((mazeSize < 2) || (mazeSize > 1000))  //throw exception if number format invalid
 					{
 						throw new NumberFormatException();
 					}
@@ -52,7 +53,8 @@ public class IOHandler
 					throw new NumberFormatException();
 
 			}
-		} catch (NumberFormatException e)
+		}
+		catch(NumberFormatException e)
 		{
 			System.err.println("error: incorrect argument format.");
 			System.err.println("expected format: mazeSolver <N>. (add flag \"-d\" for debugger mode)");
@@ -81,7 +83,6 @@ public class IOHandler
 	private static void selectSolver(Maze maze)
 	{
 		char selection;
-
 		Scanner sc = new Scanner(System.in);
 
 		try
@@ -125,10 +126,5 @@ public class IOHandler
 		{
 			System.out.println("Invalid entry. Please try again, making sure to enter only one character.");
 		}
-
-
-
-
-
 	}
 }

@@ -1,7 +1,6 @@
 package com.mazesolver.java;
 
 import com.mazesolver.java.maze.Maze;
-import com.mazesolver.java.solver.*;
 import com.mazesolver.java.utilities.IOHandler;
 
 public class Main

@@ -63,7 +63,6 @@ public class Maze
 
 		switch(bound)
 		{
-			// TODO: these might need to be re-looked at. Top = Down and Left = Right
 			case Constants.UP: // top bound
 				this.start = this.mazeGrid[0][rand.nextInt(Constants.getMazeSize())];
 				Constants.setStartingBorder(Constants.UP);
@@ -73,11 +72,11 @@ public class Maze
 				Constants.setStartingBorder(Constants.RIGHT);
 				break;
 			case Constants.DOWN: // bottom bound
-				this.start = this.mazeGrid[0][rand.nextInt(Constants.getMazeSize())];
+				this.start = this.mazeGrid[Constants.getMazeSize() - 1][rand.nextInt(Constants.getMazeSize())];
 				Constants.setStartingBorder(Constants.DOWN);
 				break;
 			case Constants.LEFT: // left bound
-				this.start = this.mazeGrid[rand.nextInt(Constants.getMazeSize())][Constants.getMazeSize() - 1];
+				this.start = this.mazeGrid[rand.nextInt(Constants.getMazeSize())][0];
 				Constants.setStartingBorder(Constants.LEFT);
 				break;
 			default:
