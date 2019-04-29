@@ -20,8 +20,6 @@ public class UniformCostSearch extends Solver
 		PriorityQueue<PriorityQueueNode> queue = new PriorityQueue<>();
 		ArrayList<MazeCell> visited = new ArrayList();  // For making sure not to visit a previous cell
 		PriorityQueueNode currentNode = new PriorityQueueNode(this.maze.getStart(), 0, 0);
-		Scanner sc = new Scanner(System.in);
-		char selection;
 		boolean skip = false;
 		
 		if(Constants.isDebugMode())
@@ -49,31 +47,7 @@ public class UniformCostSearch extends Solver
 				break;
 			}
 
-			if(!skip)
-			{
-				MazePrinter.printMaze(this.maze);
-				
-				do
-				{					
-					System.out.print("Continue to next step (c), or skip to the end (s)? ");
-					selection = sc.next().charAt(0);
-
-					switch(selection)
-					{
-						case 'c':
-						case 'C':
-							break;
-						case 's':
-						case 'S':
-							skip = true;
-							break;
-						default:
-							System.out.println("Invalid entry, please try again:");
-							selection = 'e';
-							break;
-					}
-				} while(selection == 'e');
-			}
+			skip = this.checkSkip(skip);
 			
 			//iterate through all 4 directions to see if the children nodes are valid moves
 			// and if they should be expanded

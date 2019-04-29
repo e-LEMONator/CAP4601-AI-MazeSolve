@@ -3,6 +3,7 @@ package com.mazesolver.java.utilities;
 import com.mazesolver.java.maze.Maze;
 import com.mazesolver.java.solver.AStar;
 import com.mazesolver.java.solver.Genetic;
+import com.mazesolver.java.solver.Solver;
 import com.mazesolver.java.solver.UniformCostSearch;
 import com.mazesolver.java.solver.WallFollowerSolver;
 
@@ -18,20 +19,21 @@ public class IOHandler
 
 		try
 		{
-			switch (args.length)
+			switch(args.length)
 			{
 				case 2:
-					if (!args[1].equals("-d"))
+					if(!args[1].equals("-d"))
 					{
 						throw new NumberFormatException();
-					} else
+					}
+					else
 					{
 						Constants.setDebugMode(true);
 					}
-
+					
 					mazeSize = Integer.parseInt(args[0]);
 
-					if ((mazeSize < 2) || (mazeSize > 1000))  //throw exception if number format invalid
+					if((mazeSize < 2) || (mazeSize > 1000))  //throw exception if number format invalid
 					{
 						throw new NumberFormatException();
 					}
@@ -41,7 +43,7 @@ public class IOHandler
 				case 1:
 					mazeSize = Integer.parseInt(args[0]);
 
-					if ((mazeSize < 2) || (mazeSize > 1000))  //throw exception if number format invalid
+					if((mazeSize < 2) || (mazeSize > 1000))  //throw exception if number format invalid
 					{
 						throw new NumberFormatException();
 					}
@@ -52,7 +54,8 @@ public class IOHandler
 					throw new NumberFormatException();
 
 			}
-		} catch (NumberFormatException e)
+		}
+		catch(NumberFormatException e)
 		{
 			System.err.println("error: incorrect argument format.");
 			System.err.println("expected format: mazeSolver <N>. (add flag \"-d\" for debugger mode)");
@@ -65,7 +68,7 @@ public class IOHandler
 	{
 		System.out.println("Welcome to the Maze Generator/Solver!\n");
 
-		while (!Constants.isProgramOver())
+		while(!Constants.isProgramOver())
 		{
 			System.out.println("Press 1 for Uniform Cost Search");
 			System.out.println("Press 2 for A* Heuristic Search");
@@ -80,36 +83,27 @@ public class IOHandler
 
 	private static void selectSolver(Maze maze)
 	{
-		char selection;
+		Solver solver = null;
 		Scanner sc = new Scanner(System.in);
+		char selection;
 
 		try
 		{
 			selection = sc.next().charAt(0);
 
-			switch (selection)
+			switch(selection)
 			{
 				case '1':
-					UniformCostSearch ucs = new UniformCostSearch(maze);
-
-					ucs.solve();
+					solver = new UniformCostSearch(maze);
 					break;
-
 				case '2':
-					AStar aStar = new AStar(maze);
-
-					aStar.solve();
+					solver = new AStar(maze);
 					break;
-
 				case '3':
-					Genetic genetic = new Genetic(maze);
-
-					genetic.solve();
+					solver = new Genetic(maze);
 					break;
 				case '4':
-					WallFollowerSolver wallFollower = new WallFollowerSolver(maze);
-
-					wallFollower.solve();
+					solver = new WallFollowerSolver(maze);
 					break;
 				case 'q':
 				case 'Q':
@@ -118,7 +112,10 @@ public class IOHandler
 				default:
 					throw new InvalidParameterException();
 			}
-		} catch (InvalidParameterException e)
+			
+			solver.solve();
+		}
+		catch(InvalidParameterException e)
 		{
 			System.out.println("Invalid entry. Please try again, making sure to enter only one character.");
 		}
