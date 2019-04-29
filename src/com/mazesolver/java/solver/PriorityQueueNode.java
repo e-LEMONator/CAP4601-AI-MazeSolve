@@ -14,26 +14,24 @@ public class PriorityQueueNode implements Comparable<PriorityQueueNode>
 		this.cost = cost;
 		this.depth = cost;
 	}
-	
+
 	public PriorityQueueNode(MazeCell cell, int cost, int depth)
 	{
 		this.cell = cell;
 		this.cost = cost;
 		this.depth = depth;
 	}
-	
+
 	@Override
 	public int compareTo(PriorityQueueNode o)
 	{
-		if(this.cost > o.cost)
+		if (this.cost > o.cost)
 		{
 			return 1;
-		}
-		else if(this.cost < o.cost)
+		} else if (this.cost < o.cost)
 		{
 			return -1;
-		}
-		else
+		} else
 		{
 			return 0;
 		}

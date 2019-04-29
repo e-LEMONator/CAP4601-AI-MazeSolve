@@ -18,21 +18,20 @@ public class IOHandler
 
 		try
 		{
-			switch(args.length)
+			switch (args.length)
 			{
 				case 2:
-					if(!args[1].equals("-d"))
+					if (!args[1].equals("-d"))
 					{
 						throw new NumberFormatException();
-					}
-					else
+					} else
 					{
 						Constants.setDebugMode(true);
 					}
-					
+
 					mazeSize = Integer.parseInt(args[0]);
 
-					if((mazeSize < 2) || (mazeSize > 1000))  //throw exception if number format invalid
+					if ((mazeSize < 2) || (mazeSize > 1000))  //throw exception if number format invalid
 					{
 						throw new NumberFormatException();
 					}
@@ -42,7 +41,7 @@ public class IOHandler
 				case 1:
 					mazeSize = Integer.parseInt(args[0]);
 
-					if((mazeSize < 2) || (mazeSize > 1000))  //throw exception if number format invalid
+					if ((mazeSize < 2) || (mazeSize > 1000))  //throw exception if number format invalid
 					{
 						throw new NumberFormatException();
 					}
@@ -53,8 +52,7 @@ public class IOHandler
 					throw new NumberFormatException();
 
 			}
-		}
-		catch(NumberFormatException e)
+		} catch (NumberFormatException e)
 		{
 			System.err.println("error: incorrect argument format.");
 			System.err.println("expected format: mazeSolver <N>. (add flag \"-d\" for debugger mode)");
@@ -67,7 +65,7 @@ public class IOHandler
 	{
 		System.out.println("Welcome to the Maze Generator/Solver!\n");
 
-		while(!Constants.isProgramOver())
+		while (!Constants.isProgramOver())
 		{
 			System.out.println("Press 1 for Uniform Cost Search");
 			System.out.println("Press 2 for A* Heuristic Search");
@@ -89,7 +87,7 @@ public class IOHandler
 		{
 			selection = sc.next().charAt(0);
 
-			switch(selection)
+			switch (selection)
 			{
 				case '1':
 					UniformCostSearch ucs = new UniformCostSearch(maze);
@@ -120,8 +118,7 @@ public class IOHandler
 				default:
 					throw new InvalidParameterException();
 			}
-		}
-		catch(InvalidParameterException e)
+		} catch (InvalidParameterException e)
 		{
 			System.out.println("Invalid entry. Please try again, making sure to enter only one character.");
 		}

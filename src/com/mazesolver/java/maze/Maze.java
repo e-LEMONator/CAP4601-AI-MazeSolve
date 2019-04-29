@@ -10,7 +10,7 @@ public class Maze
 	private MazeCell start;
 	private int startingBorder;
 	private MazeCell finish;
-	
+
 	// Instantiate every cell in the maze logic
 	public Maze()
 	{
@@ -20,27 +20,25 @@ public class Maze
 		this.mazeGrid = new MazeCell[Constants.getMazeSize()][Constants.getMazeSize()];
 
 		// instantiate cells
-		for(int row = 0; row < Constants.getMazeSize(); row++)
+		for (int row = 0; row < Constants.getMazeSize(); row++)
 		{
-			for(int column = 0; column < Constants.getMazeSize(); column++)
+			for (int column = 0; column < Constants.getMazeSize(); column++)
 			{
-				if(row == 0)
+				if (row == 0)
 				{
 					// if on the top edge there is no cell above
 					upCell = null;
-				}
-				else
+				} else
 				{
 					// otherwise set upCell to cell above
 					upCell = this.mazeGrid[row - 1][column];
 				}
 
-				if(column == 0)
+				if (column == 0)
 				{
 					// if on left column there is no cell to the left
 					leftCell = null;
-				}
-				else
+				} else
 				{
 					// otherwise set leftCell to the adjacent cell
 					leftCell = this.mazeGrid[row][column - 1];
@@ -62,7 +60,7 @@ public class Maze
 		Random rand = new Random();
 		int bound = rand.nextInt(4) + 1;
 
-		switch(bound)
+		switch (bound)
 		{
 			case Constants.UP: // top bound
 				this.start = this.mazeGrid[0][rand.nextInt(Constants.getMazeSize())];
@@ -107,12 +105,12 @@ public class Maze
 		do
 		{
 			// While the adjacent cells have not been visited, visit the cells and add to stack
-			while(!(((adjacentCell = this.getAdjacent(stack.peek(), Constants.UP)) == null) || visited.contains(adjacentCell)) ||
+			while (!(((adjacentCell = this.getAdjacent(stack.peek(), Constants.UP)) == null) || visited.contains(adjacentCell)) ||
 					!(((adjacentCell = this.getAdjacent(stack.peek(), Constants.RIGHT)) == null) || visited.contains(adjacentCell)) ||
 					!(((adjacentCell = this.getAdjacent(stack.peek(), Constants.DOWN)) == null) || visited.contains(adjacentCell)) ||
 					!(((adjacentCell = this.getAdjacent(stack.peek(), Constants.LEFT)) == null) || visited.contains(adjacentCell)))
 			{
-				if(Constants.isDebugMode())
+				if (Constants.isDebugMode())
 				{
 					System.out.printf("current cell: [%d,%d]\n", stack.peek().getRow(), stack.peek().getColumn());
 				}
@@ -123,7 +121,7 @@ public class Maze
 				{
 					moveDirection = rand.nextInt(4) + 1;
 
-					if(Constants.isDebugMode())
+					if (Constants.isDebugMode())
 					{
 						System.out.printf("Randomly generatend move direction: %d\n", moveDirection);
 					}
@@ -131,15 +129,15 @@ public class Maze
 					// Set the adjacent cell to the moveDirection from the current cell being evaluated
 					adjacentCell = this.getAdjacent(stack.peek(), moveDirection);
 
-				} while(adjacentCell == null || visited.contains(adjacentCell));
+				} while (adjacentCell == null || visited.contains(adjacentCell));
 
-				if(Constants.isDebugMode())
+				if (Constants.isDebugMode())
 				{
 					System.out.printf("Valid random move found\n");
 				}
 
 				// change the wall to an open space at the correct edge
-				switch(moveDirection)
+				switch (moveDirection)
 				{
 					case Constants.UP:
 						stack.peek().setUpEdge(Constants.OPEN);
@@ -163,14 +161,14 @@ public class Maze
 				// If the stack depth is greater than the current maxDepth and the
 				// current cell at the top of the stack is on an edge, update maxDepth
 				// and set the finish point to that cell in order to have the longest maze solution
-				if((stack.size() > maxDepth) && stack.peek().isOnBoundary())
+				if ((stack.size() > maxDepth) && stack.peek().isOnBoundary())
 				{
 					maxDepth = stack.size();
 					this.finish = stack.peek();
 				}
 			}
 
-			if(Constants.isDebugMode())
+			if (Constants.isDebugMode())
 			{
 				System.out.printf("Popping cell: [%d,%d]\n", stack.peek().getRow(), stack.peek().getColumn());
 			}
@@ -179,7 +177,7 @@ public class Maze
 			visited.add(stack.peek());
 			stack.pop();
 
-		} while(!stack.isEmpty());
+		} while (!stack.isEmpty());
 
 		this.finish.setSymbol('E');
 	}
@@ -188,7 +186,7 @@ public class Maze
 	 * finds a cell adjacent to the given cell given a move distance
 	 *
 	 * @param currentCell the cell we need to find an adjacent cell for
-	 * @param move the direction we need to move to get our adjacent cell
+	 * @param move        the direction we need to move to get our adjacent cell
 	 * @return cell in the move selection or null if there is none valid
 	 */
 	public MazeCell getAdjacent(MazeCell currentCell, int move)
@@ -197,14 +195,14 @@ public class Maze
 
 		// Check to see if the next move is out of bounds and then
 		// return the new position of the currentCell
-		if(currentCell.checkMove(move) != Constants.OOB)
+		if (currentCell.checkMove(move) != Constants.OOB)
 		{
 			row = currentCell.getRow();
 			column = currentCell.getColumn();
 
 			// Check move to determine direction of the new currentCell
 			// relative to the existing one
-			switch(move)
+			switch (move)
 			{
 				case Constants.STAY:
 					return this.mazeGrid[row][column];
@@ -223,10 +221,10 @@ public class Maze
 
 		return null;
 	}
-	
+
 	/**
 	 * calculates Manhattan distance
-	 * 
+	 *
 	 * @param currentCell cell to start measuring the distance from
 	 * @return distance from current cell to finish
 	 */
@@ -259,7 +257,7 @@ public class Maze
 	{
 		for (int i = 0; i < mazeGrid.length; i++)
 		{
-			for (int j = 0; j <mazeGrid[i].length; j++)
+			for (int j = 0; j < mazeGrid[i].length; j++)
 			{
 				mazeGrid[i][j].setSymbol(' ');
 			}

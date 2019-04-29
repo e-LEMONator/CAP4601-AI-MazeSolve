@@ -5,7 +5,7 @@ import com.mazesolver.java.utilities.IOHandler;
 
 public class Main
 {
-    public static void main(String[] args)
+	public static void main(String[] args)
 	{
 		// Parse command line arguments to determine maze
 		// dimensions NxN and set debug boolean.
@@ -15,5 +15,5 @@ public class Main
 		Maze maze = new Maze();
 
 		IOHandler.menu(maze);
-    }
+	}
 }

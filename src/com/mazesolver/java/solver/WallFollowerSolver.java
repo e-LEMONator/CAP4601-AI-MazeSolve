@@ -23,9 +23,9 @@ public class WallFollowerSolver extends Solver
 		Scanner sc = new Scanner(System.in);
 		char selection;
 		boolean skip = false;
-		
+
 		currentDirection = getLeftTurn(this.maze.getStartingBorder());
-		
+
 		while(!currentCell.equals(this.maze.getFinish()))
 		{
 			// change the nodes symbol to indicate current node
@@ -33,13 +33,13 @@ public class WallFollowerSolver extends Solver
 			{
 				currentCell.setSymbol('@');
 			}
-			
+
 			if(!skip)
 			{
 				MazePrinter.printMaze(this.maze);
-				
+
 				do
-				{					
+				{
 					System.out.print("Continue to next step (c), or skip to the end (s)? ");
 					selection = sc.next().charAt(0);
 
@@ -58,10 +58,10 @@ public class WallFollowerSolver extends Solver
 							break;
 					}
 				} while(selection == 'e');
-				
+
 				System.out.println("");
 			}
-			
+
 			while(currentCell.checkMove(currentDirection) != Constants.OPEN)
 			{
 				currentDirection = getLeftTurn(currentDirection);
@@ -72,16 +72,16 @@ public class WallFollowerSolver extends Solver
 			{
 				currentCell.setSymbol('*');
 			}
-			
+
 			currentCell = this.maze.getAdjacent(currentCell, currentDirection);
 			currentDirection = getLeftTurn(getInverseEdge(currentDirection));
 		}
-		
+
 		// print and clear the maze for the next solver method to have a fresh solution
 		MazePrinter.printMaze(this.maze);
 		this.maze.clearMaze();
 	}
-	
+
 	private int getLeftTurn(int entryEdge)
 	{
 		if(entryEdge == Constants.LEFT)
@@ -95,7 +95,7 @@ public class WallFollowerSolver extends Solver
 			return this.maze.getStartingBorder() + 1;
 		}
 	}
-	
+
 	private int getInverseEdge(int entryEdge)
 	{
 		switch(entryEdge)
