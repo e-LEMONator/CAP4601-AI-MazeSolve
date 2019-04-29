@@ -24,13 +24,13 @@ public class UniformCostSearch extends Solver
 		char selection;
 		boolean skip = false;
 		
-		queue.add(currentNode);
-
 		if(Constants.isDebugMode())
 		{
 			skip = true;
 		}
 		
+		queue.add(currentNode);
+
 		// Perform while frontier queue is not empty
 		while(!queue.isEmpty())
 		{
@@ -52,10 +52,7 @@ public class UniformCostSearch extends Solver
 			if(!skip)
 			{
 				MazePrinter.printMaze(this.maze);
-			}
-			
-			if(!skip)
-			{
+				
 				do
 				{					
 					System.out.print("Continue to next step (c), or skip to the end (s)? ");
