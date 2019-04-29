@@ -3,7 +3,7 @@ package com.mazesolver.java;
 import com.mazesolver.java.maze.Maze;
 import com.mazesolver.java.utilities.IOHandler;
 
-public class Main
+public class MazeSolver
 {
 	public static void main(String[] args)
 	{

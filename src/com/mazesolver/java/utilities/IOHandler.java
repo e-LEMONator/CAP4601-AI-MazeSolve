@@ -30,7 +30,7 @@ public class IOHandler
 					{
 						Constants.setDebugMode(true);
 					}
-					
+
 					mazeSize = Integer.parseInt(args[0]);
 
 					if((mazeSize < 2) || (mazeSize > 1000))  //throw exception if number format invalid
@@ -86,6 +86,7 @@ public class IOHandler
 		Solver solver = null;
 		Scanner sc = new Scanner(System.in);
 		char selection;
+		long startTime, elapsedTime;
 
 		try
 		{
@@ -112,7 +113,7 @@ public class IOHandler
 				default:
 					throw new InvalidParameterException();
 			}
-			
+
 			solver.solve();
 		}
 		catch(InvalidParameterException e)
