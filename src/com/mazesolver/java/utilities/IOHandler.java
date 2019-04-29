@@ -99,7 +99,7 @@ public class IOHandler
 					solver = new AStar(maze);
 					break;
 				case '3':
-					solver = new Genetic(maze);
+					solver = new Genetic(maze, 300000, 0.5, 0.2);
 					break;
 				case '4':
 					solver = new WallFollowerSolver(maze);

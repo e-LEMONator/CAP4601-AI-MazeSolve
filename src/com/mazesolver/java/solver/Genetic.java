@@ -6,29 +6,59 @@ import java.util.PriorityQueue;
 
 public class Genetic extends Solver
 {
-	public Genetic(Maze maze)
+	private int populationSize;
+	private double populationRetention;
+	private double mutationChance;
+	PriorityQueue<Individual> population;
+	
+	public Genetic(Maze maze, int populationSize, double populationRetention, double mutationChance)
 	{
 		super(maze);
+		this.populationSize = populationSize;
+		this.populationRetention = populationRetention;
+		this.mutationChance = mutationChance;
+		population = new PriorityQueue<>();
 	}
 
 	@Override
 	public void solve()
 	{
-		PriorityQueue<Individual> population = new PriorityQueue<>();
-
 		// create randomized population
-		population.forEach((individual) ->
+		for(Individual individual : this.population)
 		{
 			individual = new Individual(this.maze);
-		});
+		}
 
 		// while best solution is greater than 0
-		while (population.peek().evaluateGene() > 0)
+		while(this.population.peek().evaluateGene() > 0)
 		{
-			// select
+			select();
+			
 			// crossover
 			// mutate
 		}
 	}
-
+	
+	private void select()
+	{
+		Individual individualArray[] = (Individual[]) this.population.toArray();
+		
+		this.population.clear();
+		
+		for(int i = 0; i < (this.populationSize * this.populationRetention); i++)
+		{
+			System.out.println(individualArray[i].evaluateGene());
+			this.population.add(individualArray[i]);
+		}
+	}
+	
+	private void crossover()
+	{
+		Individual parent1, parent2, newIndividual;
+		
+		while(this.population.size() < this.populationSize)
+		{
+			
+		}
+	}
 }

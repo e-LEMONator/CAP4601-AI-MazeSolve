@@ -217,9 +217,9 @@ public class Maze
 	{
 		for(MazeCell[] mazeRow : mazeGrid)
 		{
-			for(MazeCell item : mazeRow)
+			for(MazeCell cell : mazeRow)
 			{
-				item.setSymbol(' ');
+				cell.setSymbol(' ');
 			}
 		}
 	}
