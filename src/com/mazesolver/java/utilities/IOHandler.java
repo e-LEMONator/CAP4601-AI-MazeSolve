@@ -68,7 +68,7 @@ public class IOHandler
 	{
 		System.out.println("Welcome to the Maze Generator/Solver!\n");
 
-		while(!Constants.isProgramOver())
+		do
 		{
 			System.out.println("Press 1 for Uniform Cost Search");
 			System.out.println("Press 2 for A* Heuristic Search");
@@ -76,12 +76,10 @@ public class IOHandler
 			System.out.println("Press 4 for Wall Follower Method");
 			System.out.println("Press q to quit the program\n");
 			System.out.printf("Selection: ");
-
-			selectSolver(maze);
-		}
+		} while(selectSolver(maze) == 0);
 	}
 
-	private static void selectSolver(Maze maze)
+	private static int selectSolver(Maze maze)
 	{
 		Solver solver = null;
 		Scanner sc = new Scanner(System.in);
@@ -108,8 +106,7 @@ public class IOHandler
 					break;
 				case 'q':
 				case 'Q':
-					Constants.setProgramOver(true);
-					break;
+					return 1;
 				default:
 					throw new InvalidParameterException();
 			}
@@ -120,12 +117,14 @@ public class IOHandler
 
 			if(Constants.isDebugMode())
 			{
-				System.out.println("Maze solved in " + elapsedTime + "ms");
+				System.out.println("Maze solved in " + elapsedTime + "ms\n");
 			}
 		}
 		catch(InvalidParameterException e)
 		{
 			System.out.println("Invalid entry. Please try again, making sure to enter only one character.");
 		}
+		
+		return 0;
 	}
 }
