@@ -81,11 +81,15 @@ public class IOHandler
 	private static void selectSolver(Maze maze)
 	{
 		char selection;
+		long startTime;
+		long endTime;
 		Scanner sc = new Scanner(System.in);
 
 		try
 		{
 			selection = sc.next().charAt(0);
+
+			startTime = System.currentTimeMillis();
 
 			switch (selection)
 			{
@@ -118,7 +122,13 @@ public class IOHandler
 				default:
 					throw new InvalidParameterException();
 			}
-		} catch (InvalidParameterException e)
+			endTime = System.currentTimeMillis();
+
+			long elapsedTime = endTime - startTime;
+			System.out.println("Time to solve: " + elapsedTime + "ms");
+		}
+
+		catch (InvalidParameterException e)
 		{
 			System.out.println("Invalid entry. Please try again, making sure to enter only one character.");
 		}
