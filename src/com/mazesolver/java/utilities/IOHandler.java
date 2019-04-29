@@ -70,7 +70,7 @@ public class IOHandler
 		while (!Constants.isProgramOver())
 		{
 			System.out.println("Press 1 for Uniform Cost Search");
-			System.out.println("Press 2 for A* Hurestic Search");
+			System.out.println("Press 2 for A* Heuristic Search");
 			System.out.println("Press 3 for Genetic Search");
 			System.out.println("Press 4 for Wall Follower Method");
 			System.out.println("Press q to quit the program\n");
