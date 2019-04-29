@@ -2,6 +2,7 @@ package com.mazesolver.java.solver;
 
 import com.mazesolver.java.maze.*;
 import com.mazesolver.java.utilities.Constants;
+
 import java.util.Random;
 
 public class Individual implements Comparable<Individual>
@@ -15,25 +16,25 @@ public class Individual implements Comparable<Individual>
 		this.gene = new int[Constants.getMazeSize() * Constants.getMazeSize()];
 		this.generateGene();
 	}
-	
+
 	private void generateGene()
 	{
 		Random rand = new Random();
-		
-		for(int chromosome : this.gene)
+
+		for (int chromosome : this.gene)
 		{
 			chromosome = rand.nextInt(5);
 		}
 	}
-	
+
 	public int evaluateGene()
 	{
 		int penalty = 0;
 		MazeCell currentCell = this.maze.getStart();
-		
-		for(int chromosome : this.gene)
+
+		for (int chromosome : this.gene)
 		{
-			switch(currentCell.checkMove(chromosome))
+			switch (currentCell.checkMove(chromosome))
 			{
 				case Constants.WALL:
 					penalty++;
@@ -45,28 +46,26 @@ public class Individual implements Comparable<Individual>
 				default:
 					break;
 			}
-			
-			if(currentCell.equals(this.maze.getFinish()))
+
+			if (currentCell.equals(this.maze.getFinish()))
 			{
 				break;
 			}
 		}
-		
+
 		return penalty + this.maze.getDistToFinish(currentCell);
 	}
 
 	@Override
 	public int compareTo(Individual o)
 	{
-		if(this.evaluateGene() > o.evaluateGene())
+		if (this.evaluateGene() > o.evaluateGene())
 		{
 			return 1;
-		}
-		else if(this.evaluateGene() < o.evaluateGene())
+		} else if (this.evaluateGene() < o.evaluateGene())
 		{
 			return -1;
-		}
-		else
+		} else
 		{
 			return 0;
 		}

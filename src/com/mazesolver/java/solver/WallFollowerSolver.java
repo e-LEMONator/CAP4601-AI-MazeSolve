@@ -18,7 +18,6 @@ public class WallFollowerSolver extends Solver
 	{
 		MazeCell currentCell = this.maze.getStart();
 		int currentDirection;
-		ArrayList<MazeCell> visited = new ArrayList();  // For making sure not to visit a previous cell
 
 		// switch the starting border to determine the right-hand move priority
 		switch(this.maze.getStartingBorder())

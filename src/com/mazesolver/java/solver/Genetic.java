@@ -1,6 +1,7 @@
 package com.mazesolver.java.solver;
 
 import com.mazesolver.java.maze.Maze;
+
 import java.util.PriorityQueue;
 
 public class Genetic extends Solver
@@ -22,12 +23,12 @@ public class Genetic extends Solver
 		});
 
 		// while best solution is greater than 0
-		while(population.peek().evaluateGene() > 0)
+		while (population.peek().evaluateGene() > 0)
 		{
 			// select
 			// crossover
 			// mutate
 		}
 	}
-	
+
 }

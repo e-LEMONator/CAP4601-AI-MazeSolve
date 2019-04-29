@@ -1,6 +1,7 @@
 package com.mazesolver.java.maze;
 
 import com.mazesolver.java.utilities.Constants;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class MazeCell
@@ -12,7 +13,7 @@ public class MazeCell
 	private AtomicInteger downEdge;
 	private AtomicInteger leftEdge;
 	private AtomicInteger rightEdge;
-	
+
 	public MazeCell(int row, int column, MazeCell upCell, MazeCell leftCell)
 	{
 		this.row = row;
@@ -24,59 +25,55 @@ public class MazeCell
 		this.leftEdge = new AtomicInteger();
 		this.setEdges(upCell, leftCell);
 	}
-	
+
 	/**
 	 * sets all the edges of the cell depending on its coordinates in the maze
 	 */
 	private void setEdges(MazeCell upCell, MazeCell leftCell)
 	{
-		if(this.row == 0)
+		if (this.row == 0)
 		{
 			this.upEdge.set(Constants.OOB);
 			this.downEdge.set(Constants.WALL);
-		}
-		else if(this.row == (Constants.getMazeSize() - 1))
+		} else if (this.row == (Constants.getMazeSize() - 1))
 		{
 			this.upEdge = upCell.getDownEdge();
 			this.downEdge.set(Constants.OOB);
-		}
-		else
+		} else
 		{
 			this.upEdge = upCell.getDownEdge();
 			this.downEdge.set(Constants.WALL);
 		}
-		
-		if(this.column == 0)
+
+		if (this.column == 0)
 		{
 			this.leftEdge.set(Constants.OOB);
 			this.rightEdge.set(Constants.WALL);
-		}
-		else if(this.column == (Constants.getMazeSize() - 1))
+		} else if (this.column == (Constants.getMazeSize() - 1))
 		{
 			this.leftEdge = leftCell.getRightEdge();
 			this.rightEdge.set(Constants.OOB);
-		}
-		else
+		} else
 		{
 			this.leftEdge = leftCell.getRightEdge();
 			this.rightEdge.set(Constants.WALL);
 		}
 	}
-	
+
 	/**
 	 * checks if a proposed move is valid
-	 * 
+	 *
 	 * @param move int value in range 0-4 representing move options:
-	 * 0 - no move
-	 * 1 - move up
-	 * 2 - move right
-	 * 3 - move down
-	 * 4 - move left
+	 *             0 - no move
+	 *             1 - move up
+	 *             2 - move right
+	 *             3 - move down
+	 *             4 - move left
 	 * @return true if move is valid, false otherwise
 	 */
 	public int checkMove(int move)
 	{
-		switch(move)
+		switch (move)
 		{
 			case Constants.STAY:
 				return Constants.OPEN;
@@ -102,7 +99,7 @@ public class MazeCell
 	{
 		return column;
 	}
-	
+
 	public char getSymbol()
 	{
 		return symbol;
@@ -155,7 +152,7 @@ public class MazeCell
 
 	/**
 	 * checks if a cell is on the edge of the maze
-	 * 
+	 *
 	 * @return true if the cell is on a boundary and false if it is not
 	 */
 	public boolean isOnBoundary()
