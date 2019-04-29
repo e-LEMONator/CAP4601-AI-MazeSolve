@@ -114,7 +114,11 @@ public class IOHandler
 					throw new InvalidParameterException();
 			}
 
+			startTime = System.currentTimeMillis();
 			solver.solve();
+			elapsedTime = System.currentTimeMillis() - startTime;
+
+			System.out.println("Maze solved in " + elapsedTime + "ms");
 		}
 		catch(InvalidParameterException e)
 		{
