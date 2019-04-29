@@ -8,6 +8,7 @@ public class Maze
 {
 	private MazeCell[][] mazeGrid;
 	private MazeCell start;
+	private int startingBorder;
 	private MazeCell finish;
 	
 	// Instantiate every cell in the maze logic
@@ -65,19 +66,19 @@ public class Maze
 		{
 			case Constants.UP: // top bound
 				this.start = this.mazeGrid[0][rand.nextInt(Constants.getMazeSize())];
-				Constants.setStartingBorder(Constants.UP);
+				this.startingBorder = Constants.UP;
 				break;
 			case Constants.RIGHT: // right bound
 				this.start = this.mazeGrid[rand.nextInt(Constants.getMazeSize())][Constants.getMazeSize() - 1];
-				Constants.setStartingBorder(Constants.RIGHT);
+				this.startingBorder = Constants.RIGHT;
 				break;
 			case Constants.DOWN: // bottom bound
 				this.start = this.mazeGrid[Constants.getMazeSize() - 1][rand.nextInt(Constants.getMazeSize())];
-				Constants.setStartingBorder(Constants.DOWN);
+				this.startingBorder = Constants.DOWN;
 				break;
 			case Constants.LEFT: // left bound
 				this.start = this.mazeGrid[rand.nextInt(Constants.getMazeSize())][0];
-				Constants.setStartingBorder(Constants.LEFT);
+				this.startingBorder = Constants.LEFT;
 				break;
 			default:
 				break;
@@ -242,6 +243,11 @@ public class Maze
 	public MazeCell getStart()
 	{
 		return start;
+	}
+
+	public int getStartingBorder()
+	{
+		return startingBorder;
 	}
 
 	public MazeCell getFinish()

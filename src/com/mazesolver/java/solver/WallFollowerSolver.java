@@ -13,25 +13,27 @@ public class WallFollowerSolver extends Solver
 		super(maze);
 	}
 
+	@Override
 	public void solve()
 	{
 		MazeCell currentCell = this.maze.getStart();
 		int currentDirection;
+		ArrayList<MazeCell> visited = new ArrayList();  // For making sure not to visit a previous cell
 
 		// switch the starting border to determine the right-hand move priority
-		switch (Maze.getStartingBorder())
+		switch(this.maze.getStartingBorder())
 		{
 			case Constants.UP: // top bound
-				currentDirection = Constants.DOWN;
-				break;
-			case Constants.RIGHT: // right bound
 				currentDirection = Constants.LEFT;
 				break;
-			case Constants.DOWN: // bottom bound
+			case Constants.RIGHT: // right bound
 				currentDirection = Constants.UP;
 				break;
-			case Constants.LEFT: // left bound
+			case Constants.DOWN: // bottom bound
 				currentDirection = Constants.RIGHT;
+				break;
+			case Constants.LEFT: // left bound
+				currentDirection = Constants.DOWN;
 				break;
 			default:
 				break;
@@ -40,9 +42,10 @@ public class WallFollowerSolver extends Solver
 		// clear the maze for the next solver method to have a fresh solution
 		this.maze.clearMaze();
 	}
+	
 	private void movePriority(MazeCell currentCell, int currentDirection)
 	{
-		while (currentCell != this.maze.getFinish())
+		while(currentCell != this.maze.getFinish())
 		{
 
 		}
